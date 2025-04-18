@@ -8,7 +8,7 @@ def display_options():
     print("4: Deposit ")
     print("5: Withdraw ")
     print("6: Delete Account ")
-    print("7: Exit")
+    print("7: Exit System")
 
 def user_selection():
     while(True):
@@ -19,6 +19,7 @@ def user_selection():
             while(True):
                 username = input("Enter your username.")
                 password = str(input("Hello " + username + ". What will your password be?"))
+                    print("Thank you for making an account, " + username + "!")
         elif(number == "2"):
             print("We apologize, but this side of the app is under construction!")
             return
@@ -26,10 +27,17 @@ def user_selection():
             def balance():
 
         elif(number == "4"):
-            deposit_amount = input("How much money would you like to deposit into your account? "
-                            "If you dont want to, type CANCEL.")
+           def deposit(user, amount):
+        user.balance += amount
+        print(f"Deposited ${amount}. New balance: ${user.balance}")
                 if 
         elif(number == "5"):
+             def withdraw(user, amount):
+        if amount > user.balance:
+            print("Insufficient funds.")
+        else:
+            user.balance -= amount
+            print(f"Withdrew ${amount}. New balance: ${user.balance}")
         elif(number == "6"):
         elif(number == "7"):
             quit
