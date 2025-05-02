@@ -1,33 +1,37 @@
-# HUGE credits go to "Bro Code" for their informative videos on making a banking bots in an efficient way!
-# Without their help, this project would be a huge mess...
+# HUGE credits go to "Bro Code" for their informative videos on making a banking code!
+# Without their help, this project would be a lot more of a mess than it is right now..
 balance = 0
+program_status = True #hopefully a killswitch to the code, haven't exactly figured it out...
 def check_balance():
-    print(f"Your current balance is ${balance:.2f}")
-def deposit_moolah():
-    moolah_amount = float(input("How much money do you want to be deposited?: "))
-    if moolah_amount < 0:
+    print(f"Your current balance is ${balance:.2f}") #2 floaitng point decimals
+def deposit_monies():
+    money_amount = float(input("How much money do you want to be deposited? Type 0 to cancel!: "))
+    if money_amount < 0: #less than 0
         print("----------------------------------------------------------------")
         print("Sorry, but that would enter withdrawal territory.. Head over there if you wish!")
-        print("----------------------------------------------------------------")
         return 0
+    elif money_amount == 0: #cancel
+        print('Cancelled.')
+        return program_status
+    
     else:
-        return moolah_amount
+        return money_amount
 
-def withdraw_moolah():
-    moolah_amount = float(input("How much money do you want to be withdrawn? "))
-    if moolah_amount > balance:
+def withdraw_monies():
+    money_amount = float(input("How much money do you want to be withdrawn? Type 0 to cancel: "))
+    if money_amount > balance: #More than balance
         print("----------------------------------------------------------------")
         print("Sorry, but you are way too broke to do that... Try something < or = your current balance!")
-        print("----------------------------------------------------------------")
         return 0
-    elif moolah_amount < 0:
+    elif money_amount < 0: #Less than 0!!
         print("----------------------------------------------------------------")
-        print("Hey, goofball, you are meant to withdraw more than 0 dollars!")
-        print("----------------------------------------------------------------")
+        print("Unfortunately, when withdrawing you are supposed to withdraw at least 1 dollar!")
         return 0
+    elif money_amount == 0:
+        print('Why.')
+        return program_status
     else:
-        return moolah_amount
-program_status = True
+        return money_amount
 
 while program_status:
     print("----------------------------------------------------------------")
@@ -41,30 +45,26 @@ while program_status:
     print("----------------------------------------------------------------")
 
     user_request = input("Put in a number between 1-6, and make sure they are digits! ")
-    print("----------------------------------------------------------------")
 
     if user_request == "1":
         username = input("Hello, what do you want your username to be?")
         password = input(f"Hello, " + username + ", what do you want your password to be?")
         print("Wonderful! Enjoy your stay at the bank. If you have more than one account,"
             " our security wont tell.")
-    elif user_request == "2":
-
-        print("----------------------------------------------------------------")
+    elif user_request == "2": #starts with 0
         check_balance()
-    elif user_request == "3":
-        balance += deposit_moolah()
-    elif user_request == "4":
-        balance -= withdraw_moolah()
+    elif user_request == "3": 
+        balance += deposit_monies() #addition
+    elif user_request == "4": 
+        balance -= withdraw_monies() #subtraction
     elif user_request == "5":
-        print("Are you sure?")
-        if input == "yes":
-            print("Account has been deleted.")
-        elif input == "no":
-            print("Account deletion has been ")
-        elif input == "WHERE IS OMNIMAN": #couldn't resist the urge to add some easter egg...
-            print("Account has been deleted for brainrot. The FBI is watching..")
+            delete_confirmation = input("Are you sure?")
+            if input == ("yes", "Yes", "Yes."):
+                print("Any and all possible accounts have been deleted!")
+            elif input == ("no", "No", "No."):
+                print("Well then, have a good day!")
     elif user_request == "6":
         program_status == False
+        exit
     else:
         print("Invalid choice, choose again.")
